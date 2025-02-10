@@ -8,6 +8,9 @@ This project predicts the price of used cars based on features like mileage, bra
 - Pandas, NumPy, Matplotlib, Seaborn
 - Scikit-Learn
 
+## Dataset
+Download the dataset from [Kaggle](https://www.kaggle.com/datasets/hellbuoy/car-price-prediction).
+
 ## Results
 - RMSE: 2500
 - R² Score: 0.85
