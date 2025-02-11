@@ -1,0 +1,62 @@
+# Step 1: Install and import libraries
+!pip install pandas numpy matplotlib seaborn scikit-learn
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Step 2: Load the dataset
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data"
+column_names = ['MPG', 'Cylinders', 'Displacement', 'Horsepower', 'Weight', 'Acceleration', 'Model Year', 'Origin', 'Car Name']
+df = pd.read_csv(url, delim_whitespace=True, names=column_names, na_values='?')
+
+# Step 3: Data Cleaning
+print(df.isnull().sum())  # Check for missing values
+df = df.dropna()  # Drop rows with missing values
+df = df.drop('Car Name', axis=1)  # Drop the 'Car Name' column
+
+# Step 4: Exploratory Data Analysis (EDA)
+# Pairplot to visualize relationships
+sns.pairplot(df, vars=['MPG', 'Cylinders', 'Displacement', 'Horsepower', 'Weight', 'Acceleration'])
+plt.show()
+
+# Correlation heatmap
+plt.figure(figsize=(10, 6))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap')
+plt.show()
+
+# Step 5: Statistical Analysis
+# Linear Regression to predict MPG
+X = df.drop(['MPG', 'Origin'], axis=1)  # Features
+y = df['MPG']  # Target
+
+# Split the data into training and testing sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train the model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Evaluate the model
+y_pred = model.predict(X_test)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+r2 = r2_score(y_test, y_pred)
+print(f"RMSE: {rmse}")
+print(f"R² Score: {r2}")
+
+# Step 6: Insights and Recommendations
+# Feature importance
+coefficients = pd.DataFrame(model.coef_, X.columns, columns=['Coefficient'])
+print(coefficients)
+
+# Visualize feature importance
+plt.figure(figsize=(10, 6))
+sns.barplot(x=coefficients.index, y=coefficients['Coefficient'])
+plt.title('Feature Importance for MPG Prediction')
+plt.xlabel('Features')
+plt.ylabel('Coefficient Value')
+plt.show()
