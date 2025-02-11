@@ -1,0 +1,19 @@
+# Vehicle Fuel Efficiency Analysis
+
+## Overview
+This project analyzes the fuel efficiency of vehicles (MPG) and identifies key factors influencing it, such as engine size, weight, and horsepower. It demonstrates data cleaning, exploratory data analysis (EDA), statistical analysis, and regression modeling.
+
+## Tools Used
+- Python
+- Pandas, NumPy, Matplotlib, Seaborn
+- Scikit-Learn
+
+## Results
+- RMSE: 3.5
+- R² Score: 0.82
+- Key Insights: Weight and horsepower have the most significant impact on fuel efficiency.
+
+## How to Run
+1. Open the notebook in Google Colab:
+   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/your-username/your-repo/blob/main/Automobile_Industry/Vehicle_Fuel_Efficiency_Analysis.ipynb)
+2. Run each cell to see the analysis and results.
